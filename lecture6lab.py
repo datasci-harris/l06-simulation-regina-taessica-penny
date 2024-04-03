@@ -25,7 +25,15 @@ print(politicians[0].name) # gives you Alice and
 print(politicians[0].position) # gives you 10
 
 """
+class Politician():
+    def __init__(self, name, position):
+        self.name = name
+        self.position = position
+    
+politicians = [Politician('Alice', 10), Politician('Bob', 70)]
 
+print(politicians[0].name)  
+print(politicians[0].position)
 
 """
 2. Define a class called 'Voter'. The class should have a property named 
@@ -39,7 +47,11 @@ Hint: You should be able to test whether you've done this correctly if
 
 print(voters[13].preferred_point) # gives you 14 and so on
 """
-
+class Voter():
+    def __init__ (self, preferred_point):
+        self.preferred_point = preferred_point
+voters = [Voter(i) for i in range(1, 101)]
+print(voters[13].preferred_point)
 
 """
 3. Go back to the class Voter and create a method named 'will_vote_for()' that 
@@ -62,7 +74,32 @@ c. Compare this distance to smallest_distance. If it's strictly smaller,
 replace smallest_distance with the distance, and closest_politician with the 
 object being examined
 """
+class Politician():
+    def __init__(self, name, position):
+        self.name = name
+        self.position = position
+class Voter():
+    def __init__ (self, preferred_point):
+        self.preferred_point = preferred_point
+    
+    def will_vote_for(self, politicians):
+        closest_politician = None
+        smallest_distance = 200
+        
+        for politician in politicians:
+            distance = abs(self.preferred_point - politician.position)
+            if distance < smallest_distance:
+                smallest_distance = distance
+                closest_politician = politician.name
 
+        return closest_politician
+    
+politicians = [Politician("Alice", 10), Politician("Bob", 70)]      
+voters = [Voter(i) for i in range(1, 101)]
+
+
+print(voters [9].will_vote_for(politicians))
+print(voters [69].will_vote_for(politicians))
 
 """
 4. Consider the following dictionary that will be used to keep a tally of which
