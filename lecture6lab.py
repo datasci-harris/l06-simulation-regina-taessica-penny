@@ -99,7 +99,7 @@ voters = [Voter(i) for i in range(1, 101)]
 
 
 print(voters [9].will_vote_for(politicians))
-print(voters [69].will_vote_for(politicians))
+print(voters [50].will_vote_for(politicians))
 
 """
 4. Consider the following dictionary that will be used to keep a tally of which
@@ -114,7 +114,16 @@ they will most likely vote for using the method you defined earlier.
 Then update that politician's value in the tally dictionary. 
 Print tally. Who will win?
 """
+tally = {"Alice": 0, "Bob":0}
+for voter in voters:
+    preferred_politician = voter.will_vote_for(politicians)
+    if preferred_politician in tally:
+        tally[preferred_politician] += 1
+print(tally)
 
+# Determining who will win based on the tally
+winner = max(tally, key=tally.get)
+print("Winner:", winner)
 
 """
 5. Our model is now ready to be played with ... er ... I mean used to generate
