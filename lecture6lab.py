@@ -197,7 +197,7 @@ class Voter:
 
     def will_vote_for(self, politicians):
         closest_politician = None
-        smallest_distance = 200  # Larger than any possible distance in this scenario
+        smallest_distance = 200  
         for politician in politicians:
             distance = abs(self.preferred_point - politician.position)
             if distance < smallest_distance:
@@ -220,7 +220,6 @@ def run_election(alice_position):
 max_votes = 0
 max_position = 0
 
-# Iterate over possible positions for Alice to find the one that maximizes her votes
 for position in range(1, 101):
     tally = run_election(position)
     if tally["Alice"] > max_votes:
