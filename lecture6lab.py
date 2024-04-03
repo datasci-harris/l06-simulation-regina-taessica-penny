@@ -142,7 +142,93 @@ Bonus: what's the position that maximizes her tally?
 
 This part will not be auto-graded
 """
+class Politician:
+    def __init__(self, name, position):
+        self.name = name
+        self.position = position
+class Voter():
+    def __init__ (self, preferred_point):
+        self.preferred_point = preferred_point
+        
+    def will_vote_for(self, politicians):
+       closest_politician = None
+       smallest_distance = 200
+       
+       for politician in politicians:
+           distance = abs(self.preferred_point - politician.position)
+           if distance < smallest_distance:
+               smallest_distance = distance
+               closest_politician = politician.name
 
+       return closest_politician
+
+
+politicians = [Politician("Alice", 10), Politician("Bob", 70)]
+voters = [Voter(i) for i in range(1, 101)]
+
+def run_election(alice_position):
+    politicians[0] = Politician("Alice", alice_position)
+    tally = {"Alice": 0, "Bob":0}
+
+    for voter in voters:
+        preferred_politician = voter.will_vote_for(politicians)
+        tally[preferred_politician] += 1
+    return tally
+
+for position in range(1, 101):
+    tally = run_election(position)
+    if tally["Alice"] > tally["Bob"]:
+        winning_position = position
+        winning_tally = tally
+        break
+
+print("Winning Position:", winning_position)
+print("Winning Tally:", winning_tally)
+
+# Bonus: what's the position that maximizes her tally?
+class Politician:
+    def __init__(self, name, position):
+        self.name = name
+        self.position = position
+
+class Voter:
+    def __init__(self, preferred_point):
+        self.preferred_point = preferred_point
+
+    def will_vote_for(self, politicians):
+        closest_politician = None
+        smallest_distance = 200  # Larger than any possible distance in this scenario
+        for politician in politicians:
+            distance = abs(self.preferred_point - politician.position)
+            if distance < smallest_distance:
+                smallest_distance = distance
+                closest_politician = politician.name
+        return closest_politician
+
+politicians = [Politician("Alice", 10), Politician("Bob", 70)]
+voters = [Voter(i) for i in range(1, 101)]
+
+def run_election(alice_position):
+    politicians[0] = Politician("Alice", alice_position)
+    tally = {"Alice": 0, "Bob":0}
+
+    for voter in voters:
+        preferred_politician = voter.will_vote_for(politicians)
+        tally[preferred_politician] += 1
+    return tally
+
+max_votes = 0
+max_position = 0
+
+# Iterate over possible positions for Alice to find the one that maximizes her votes
+for position in range(1, 101):
+    tally = run_election(position)
+    if tally["Alice"] > max_votes:
+        max_votes = tally["Alice"]
+        max_position = position
+
+print(f"Position that maximizes Alice's votes: {max_position}")
+print(f"Maximum votes for Alice: {max_votes}")
 
 """
 BONUS PROBLEMS
